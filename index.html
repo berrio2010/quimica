@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sistema Interactivo de Enlaces Químicos - Tabla Periódica</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='tabla-p.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-header">
+                <i class="fas fa-atom fa-spin icon-left"></i>
+                <h1>Constructor de Enlaces Químicos</h1>
+                <i class="fas fa-atom fa-spin icon-left"></i>
+            </div>
+            <p>Plataforma Interactiva de Estructuras de Lewis</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- SIDEBAR IZQUIERDO - TABLERO -->
+        <div class="sidebar tablero-sidebar">
+            <div class="panel-header">
+                <h2>Tablero de Construcción</h2>
+                <div class="header-actions">
+                    <button id="toggle-tabla-modal-btn" class="btn-tabla-toggle" title="Abrir Tabla Periódica">
+                        <i class="fas fa-table"></i>
+                    </button>
+                    <span class="info-icon" title="Arrastra elementos aquí para construir moléculas">ⓘ</span>
+                </div>
+            </div>
+
+            <div id="tablero" class="tablero"></div>
+
+            <div id="enlace-info" class="enlace-info">
+                <div class="info-title">Información del Enlace</div>
+                <p>Selecciona dos elementos y acércalos para ver el tipo de enlace formado</p>
+            </div>
+
+            <div class="panel-controls">
+                <button id="limpiar-btn" class="btn-primary btn-lg">🗑️ Limpiar Tablero</button>
+                <button id="info-btn" class="btn-secondary">ℹ️ Ayuda</button>
+            </div>
+
+            <div class="learning-section">
+                <h3>📚 Apuntes educativos</h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="color-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <span><strong>Azul:</strong> No-metales</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        <span><strong>Rojo:</strong> Halógenos</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        <span><strong>Cian:</strong> Nobles</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                        <span><strong>Naranja:</strong> Metales</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL - TABLA PERIÓDICA -->
+    <div id="tabla-modal" class="tabla-modal">
+        <div class="tabla-modal-content">
+            <div class="tabla-modal-header">
+                <h3>Tabla Periódica de Elementos</h3>
+                <button id="close-tabla-modal-btn" class="close-modal-btn">×</button>
+            </div>
+
+            <div class="filter-section">
+                <h3>Filtrar por categoría:</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="no-metal">No-Metales</button>
+                    <button class="filter-btn" data-filter="halógeno">Halógenos</button>
+                    <button class="filter-btn" data-filter="noble">Gases Nobles</button>
+                    <button class="filter-btn" data-filter="metal-alcalino">Met. Alcalinos</button>
+                    <button class="filter-btn" data-filter="metal-transicion">Met. Transición</button>
+                </div>
+            </div>
+
+            <div class="tabla-container">
+                <div id="tabla-periodica" class="tabla-periodica"></div>
+            </div>
+
+            <div class="info-panel">
+                <div id="elemento-info" class="elemento-detalles">
+                    <p style="color: #999;">Selecciona un elemento para ver sus propiedades</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-ayuda" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cómo usar el Constructor de Enlaces</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Paso 1: Selecciona elementos</h3>
+                <p>Haz clic en cualquier elemento de la tabla periódica para agregarlo al tablero.</p>
+
+                <h3>Paso 2: Arrastra los átomos</h3>
+                <p>Usa el mouse o táctil para mover los átomos en el tablero.</p>
+
+                <h3>Paso 3: Forma enlaces</h3>
+                <p>Acerca dos átomos para que se formen enlaces químicos automáticamente:</p>
+                <ul>
+                    <li><strong>Enlace Iónico:</strong> Cuando hay una gran diferencia de electronegatividad, se transfieren electrones completamente.</li>
+                    <li><strong>Enlace Covalente:</strong> Cuando se comparten pares de electrones entre átomos.</li>
+                </ul>
+
+                <h3>Interpretación visual</h3>
+                <ul>
+                    <li>Los puntos dorados alrededor del átomo representan los <strong>electrones de valencia</strong></li>
+                    <li>El número junto al símbolo indica la <strong>carga iónica</strong> (cuando existe)</li>
+                    <li>Los átomos ionizados cambian de color al formar enlaces iónicos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src='main.js'></script> 
+</body>
+</html>
