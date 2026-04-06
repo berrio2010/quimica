@@ -31,10 +31,7 @@ function crearTablaPeriodica() {
         elemento.setAttribute('data-numero', datos.numero);
         elemento.title = `${simbolo} - Z: ${datos.numero} - Masa: ${datos.masa}`;
         
-        elemento.innerHTML = `
-            <span class="elemento-simbolo">${simbolo}</span>
-            <span class="elemento-valencia">e⁻: ${datos.valencia}</span>
-        `;
+        elemento.innerHTML = `${simbolo}`;
         
         elemento.addEventListener('click', () => crearAtomo(simbolo));
         elemento.addEventListener('mouseenter', () => mostrarElementoInfo(simbolo, datos));
@@ -350,95 +347,128 @@ function actualizarVisualizacionAtomo(atomo) {
     dibujarElectrones(valenciaDiv, atomo.valencia);
 }
 
-// Mostrar información del enlace
+// Mostrar información del enlace - ACTUALIZADO PARA NUEVO DISEÑO
 function mostrarInfoEnlace(enlace) {
-    const infoDiv = document.getElementById('enlace-info');
+    const bondTypeBadge = document.getElementById('bond-type-badge');
+    const reactionFormula = document.getElementById('reaction-formula');
+    const transferMechanics = document.getElementById('transfer-mechanics');
+    
+    // Ocultar el placeholder del canvas si hay átomos
+    if (atomos.length > 0) {
+        const placeholder = document.querySelector('.canvas-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+    }
     
     if (enlace) {
-        let mensaje = '';
+        let tipo_display = '';
+        let formula = '';
+        let mecanica = '';
+
         const { tipo, atomo1, atomo2 } = enlace;
 
         if (tipo === 'ionico') {
+            tipo_display = 'Ionic Bond Detected';
             const cationoSim = atomo1.electronesTransferidos > 0 ? atomo1.simbolo : atomo2.simbolo;
             const anionSim = atomo1.electronesTransferidos < 0 ? atomo1.simbolo : atomo2.simbolo;
             const carga = Math.abs(atomo1.electronesTransferidos);
             
-            mensaje = `
-                <div class="info-title">⚛️ Enlace Iónico Detectado</div>
-                <p><strong>Reacción:</strong> ${atomo1.simbolo} + ${atomo2.simbolo} → ${cationoSim}<sup>+${carga}</sup> + ${anionSim}<sup>-${carga}</sup></p>
-                <p><strong>Tipo:</strong> Transferencia electrónica (${carga} electrón${carga > 1 ? 'es' : ''} transferido${carga > 1 ? 's' : ''})</p>
-                <p><strong>Resultado:</strong> Compuesto iónico con iones cargados</p>
-            `;
+            formula = `${atomo1.simbolo} + ${atomo2.simbolo} → ${cationoSim}<sup>+${carga}</sup> + ${anionSim}<sup>-${carga}</sup>`;
+            mecanica = `<strong>Single electron migration from ${atomo1.simbolo} to ${atomo2.simbolo}</strong>`
+            
         } else if (tipo === 'covalente') {
+            tipo_display = 'Covalent Bond Detected';
             const electronesCompartidos = Math.min(atomo1.valencia, atomo2.valencia);
-            mensaje = `
-                <div class="info-title">🔗 Enlace Covalente Detectado</div>
-                <p><strong>Reacción:</strong> ${atomo1.simbolo} + ${atomo2.simbolo} → ${atomo1.simbolo}${atomo2.simbolo}</p>
-                <p><strong>Tipo:</strong> Compartición de ${electronesCompartidos} par${electronesCompartidos > 1 ? 'es' : ''} de electrones</p>
-                <p><strong>Resultado:</strong> Molécula covalente</p>
-            `;
+            formula = `${atomo1.simbolo} + ${atomo2.simbolo} → ${atomo1.simbolo}${atomo2.simbolo}`;
+            mecanica = `<strong>Electron pair sharing between atoms</strong><br><em>${electronesCompartidos} electron pair${electronesCompartidos > 1 ? 's' : ''} shared</em>`;
         }
 
-        infoDiv.innerHTML = mensaje;
+        bondTypeBadge.innerHTML = `<span>${tipo_display}</span>`;
+        reactionFormula.innerHTML = formula;
+        transferMechanics.innerHTML = mecanica;
     } else {
-        infoDiv.innerHTML = '<div class="info-title">ℹ️ Información</div><p>Selecciona dos elementos y acércalos para ver el tipo de enlace formado</p>';
+        // Mostrar estado por defecto
+        bondTypeBadge.innerHTML = '<span>No bond detected</span>';
+        reactionFormula.innerHTML = 'Select elements to see formula';
+        transferMechanics.innerHTML = '<em>Electron transfer details</em>';
+        
+        // Mostrar placeholder si no hay átomos
+        if (atomos.length === 0) {
+            const placeholder = document.querySelector('.canvas-placeholder');
+            if (placeholder) placeholder.style.display = 'block';
+        }
     }
 }
 
 // Limpiar tablero
 function limpiarTablero() {
     const tablero = document.getElementById('tablero');
-    tablero.innerHTML = '';
+    tablero.innerHTML = `
+        <div class="canvas-placeholder">
+            <i class="fas fa-arrow-pointer"></i>
+            <p>Selecciona elementos de la tabla para comenzar</p>
+        </div>
+    `;
     atomos = [];
-    document.getElementById('enlace-info').innerHTML = '<div class="info-title">ℹ️ Información</div><p>Selecciona dos elementos y acércalos para ver el tipo de enlace formado</p>';
+    
+    // Resetear análisis
+    document.getElementById('bond-type-badge').innerHTML = '<span>No bond detected</span>';
+    document.getElementById('reaction-formula').innerHTML = 'Select elements to see formula';
+    document.getElementById('transfer-mechanics').innerHTML = '<em>Electron transfer details</em>';
 }
 
-// Modal de ayuda
+// Modal de ayuda - ACTUALIZADO
 function configurarModal() {
     const btnInfo = document.getElementById('info-btn');
     const modal = document.getElementById('modal-ayuda');
     const closeBtn = document.querySelector('.close-btn');
 
     btnInfo.addEventListener('click', () => {
-        modal.classList.add('show');
+        modal.classList.add('active');
     });
 
     closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
+         modal.classList.remove('active');
     });
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
-            modal.classList.remove('show');
+            modal.classList.remove('active');
+        }
+    });
+    
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
         }
     });
 }
 
-// Configurar modal de tabla periódica
+// Configurar modal de tabla periódica - ACTUALIZADO
 function configurarModalTabla() {
     const openBtn = document.getElementById('toggle-tabla-modal-btn');
     const closeBtn = document.getElementById('close-tabla-modal-btn');
     const tablaModal = document.getElementById('tabla-modal');
     
     openBtn.addEventListener('click', () => {
-        tablaModal.classList.add('show');
+        tablaModal.classList.add('active');
     });
     
     closeBtn.addEventListener('click', () => {
-        tablaModal.classList.remove('show');
+        tablaModal.classList.remove('active');
     });
     
     // Cerrar modal al hacer clic fuera
     tablaModal.addEventListener('click', (e) => {
         if (e.target === tablaModal) {
-            tablaModal.classList.remove('show');
+            tablaModal.classList.remove('active');
         }
     });
     
     // Cerrar con tecla Escape
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && tablaModal.classList.contains('show')) {
-            tablaModal.classList.remove('show');
+        if (e.key === 'Escape' && tablaModal.classList.contains('active')) {
+            tablaModal.classList.remove('active');
         }
     });
 }

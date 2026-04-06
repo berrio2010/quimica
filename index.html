@@ -3,74 +3,146 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Sistema Interactivo de Enlaces Químicos - Tabla Periódica</title>
+    <title>ChemCurator - Constructor de Enlaces Químicos</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='tabla-p.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar">
-        <div class="navbar-content">
-            <div class="navbar-header">
-                <i class="fas fa-atom fa-spin icon-left"></i>
-                <h1>Constructor de Enlaces Químicos</h1>
-                <i class="fas fa-atom fa-spin icon-left"></i>
+    <!-- NAVBAR SUPERIOR -->
+    <div class="navbar-top">
+        <div class="navbar-top-content">
+            <div class="navbar-logo">
+                <i class="fas fa-flask-vial"></i>
+                <span class="logo-text">ChemCurator</span>
             </div>
-            <p>Plataforma Interactiva de Estructuras de Lewis</p>
+            <div class="navbar-nav">
+                <a href="#" class="nav-link">Lab</a>
+                <a href="#" class="nav-link active">Table</a>
+                <a href="#" class="nav-link">Library</a>
+                <a href="#" class="nav-link">History</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="btn-analyze"><i class="fas fa-flask"></i> Analyze Reaction</button>
+                <button class="btn-help" title="Ayuda"><i class="fas fa-circle-question"></i></button>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <!-- SIDEBAR IZQUIERDO - TABLERO -->
-        <div class="sidebar tablero-sidebar">
-            <div class="panel-header">
-                <h2>Tablero de Construcción</h2>
-                <div class="header-actions">
-                    <button id="toggle-tabla-modal-btn" class="btn-tabla-toggle" title="Abrir Tabla Periódica">
-                        <i class="fas fa-table"></i>
-                    </button>
-                    <span class="info-icon" title="Arrastra elementos aquí para construir moléculas">ⓘ</span>
-                </div>
-            </div>
-
-            <div id="tablero" class="tablero"></div>
-
-            <div id="enlace-info" class="enlace-info">
-                <div class="info-title">Información del Enlace</div>
-                <p>Selecciona dos elementos y acércalos para ver el tipo de enlace formado</p>
-            </div>
-
-            <div class="panel-controls">
-                <button id="limpiar-btn" class="btn-primary btn-lg">🗑️ Limpiar Tablero</button>
-                <button id="info-btn" class="btn-secondary">ℹ️ Ayuda</button>
-            </div>
-
-            <div class="learning-section">
-                <h3>📚 Apuntes educativos</h3>
-                <div class="legend">
-                    <div class="legend-item">
-                        <div class="color-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-                        <span><strong>Azul:</strong> No-metales</span>
+    <div class="main-layout">
+        <!-- SIDEBAR IZQUIERDO -->
+        <aside class="sidebar-left">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
                     </div>
-                    <div class="legend-item">
-                        <div class="color-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
-                        <span><strong>Rojo:</strong> Halógenos</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
-                        <span><strong>Cian:</strong> Nobles</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="color-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
-                        <span><strong>Naranja:</strong> Metales</span>
+                    <div class="user-info">
+                        <div class="user-name">Molecular Curator</div>
+                        <div class="user-level">Level 4 Chemist</div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Workspace</span>
+                </div>
+                <div class="nav-item active">
+                    <i class="fas fa-table"></i>
+                    <span>Elements</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-link"></i>
+                    <span>Bonding</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-shield"></i>
+                    <span>Safety</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- HEADER PRINCIPAL -->
+            <div class="main-header">
+                <div class="header-title">
+                    <h1>Constructor de Enlaces Químicos</h1>
+                    <p>Plataforma Interactiva de Estructuras de Lewis</p>
+                </div>
+            </div>
+
+            <!-- ÁREA DEL CANVAS -->
+            <div class="canvas-container">
+                <div id="tablero" class="tablero">
+                    <div class="canvas-placeholder">
+                        <i class="fas fa-arrow-pointer"></i>
+                        <p>Selecciona elementos de la tabla para comenzar</p>
+                    </div>
+                </div>
+
+                <!-- BOTÓN FLOTANTE TABLA -->
+                <button id="toggle-tabla-modal-btn" class="btn-floating-table" title="Abrir Tabla Periódica">
+                    <i class="fas fa-table"></i>
+                </button>
+            </div>
+
+            <!-- PANEL INFERIOR - ANÁLISIS EN VIVO -->
+            <div class="analysis-panel">
+                <div class="analysis-header">
+                    <span class="analysis-label">LIVE ANALYSIS</span>
+                    <h3>Bond Information</h3>
+                </div>
+
+                <div class="analysis-content">
+                    <div class="bond-type-badge" id="bond-type-badge">
+                        <span>No bond detected</span>
+                    </div>
+
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <div class="analysis-item-label">Reaction Formula</div>
+                            <div id="reaction-formula" class="analysis-item-value">
+                                Select elements to see formula
+                            </div>
+                        </div>
+
+                        <div class="analysis-item">
+                            <div class="analysis-item-label">Transfer Mechanics</div>
+                            <div id="transfer-mechanics" class="analysis-item-value">
+                                <em>Electron transfer details</em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-actions">
+                        <button id="limpiar-btn" class="btn-action btn-clear">
+                            <i class="fas fa-trash"></i> Limpiar Tablero
+                        </button>
+                        <button id="info-btn" class="btn-action btn-help">
+                            <i class="fas fa-circle-question"></i> Ayuda
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <!-- MODAL - TABLA PERIÓDICA -->
@@ -105,6 +177,7 @@
         </div>
     </div>
 
+    <!-- MODAL - AYUDA -->
     <div id="modal-ayuda" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -116,20 +189,16 @@
                 <p>Haz clic en cualquier elemento de la tabla periódica para agregarlo al tablero.</p>
 
                 <h3>Paso 2: Arrastra los átomos</h3>
-                <p>Usa el mouse o táctil para mover los átomos en el tablero.</p>
+                <p>Usa el mouse para mover los átomos en el canvas central.</p>
 
                 <h3>Paso 3: Forma enlaces</h3>
-                <p>Acerca dos átomos para que se formen enlaces químicos automáticamente:</p>
-                <ul>
-                    <li><strong>Enlace Iónico:</strong> Cuando hay una gran diferencia de electronegatividad, se transfieren electrones completamente.</li>
-                    <li><strong>Enlace Covalente:</strong> Cuando se comparten pares de electrones entre átomos.</li>
-                </ul>
+                <p>Acerca dos átomos para que se formen enlaces químicos automáticamente.</p>
 
                 <h3>Interpretación visual</h3>
                 <ul>
-                    <li>Los puntos dorados alrededor del átomo representan los <strong>electrones de valencia</strong></li>
-                    <li>El número junto al símbolo indica la <strong>carga iónica</strong> (cuando existe)</li>
-                    <li>Los átomos ionizados cambian de color al formar enlaces iónicos</li>
+                    <li>Los puntos alrededor del átomo representan los <strong>electrones de valencia</strong></li>
+                    <li>El número indica la <strong>carga</strong> del átomo</li>
+                    <li>Los colores indican el tipo de elemento</li>
                 </ul>
             </div>
         </div>
