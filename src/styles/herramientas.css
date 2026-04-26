@@ -1,0 +1,273 @@
+/* ====================================
+   ESTILOS - HERRAMIENTAS
+   ==================================== */
+
+.herramientas-container {
+    animation: slideUp 0.5s ease-in-out;
+}
+
+/* ====================================
+   GRID DE HERRAMIENTAS
+   ==================================== */
+
+.herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* ====================================
+   TARJETA DE HERRAMIENTA
+   ==================================== */
+
+.herramienta-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border: 2px solid var(--border-glow);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2),
+                inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+.herramienta-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, var(--shadow-glow), transparent);
+    transition: left 0.4s ease;
+    z-index: 0;
+}
+
+.herramienta-card:hover::before {
+    left: 0;
+}
+
+.herramienta-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: var(--button-active);
+    box-shadow: 0 10px 40px var(--shadow-glow),
+                0 0 30px var(--shadow-glow),
+                inset 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+.herramienta-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* ====================================
+   ICONO DE LA TARJETA
+   ==================================== */
+
+.herramienta-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.herramienta-card:hover .herramienta-icon {
+    animation: spin 0.6s ease-out;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+    to {
+        transform: rotate(360deg) scale(1.2);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ====================================
+   TEXTO DE LA TARJETA
+   ==================================== */
+
+.herramienta-card h3 {
+    color: var(--border-glow);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    text-shadow: 0 0 15px var(--shadow-glow);
+}
+
+.herramienta-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ====================================
+   BOTÓN DE ACCIÓN
+   ==================================== */
+
+.herramienta-btn {
+    padding: 0.8rem 2rem;
+    border: 2px solid var(--border-glow);
+    background: linear-gradient(135deg, transparent, var(--shadow-glow));
+    color: var(--border-glow);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.herramienta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--shadow-glow);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.herramienta-btn:hover::before {
+    left: 0;
+}
+
+.herramienta-btn:hover {
+    color: var(--bg-primary);
+    box-shadow: 0 0 25px var(--shadow-glow),
+                inset 0 0 15px var(--shadow-glow);
+    transform: scale(1.05);
+}
+
+.herramienta-btn:active {
+    transform: scale(0.95);
+}
+
+/* ====================================
+   TARJETAS ESPECÍFICAS
+   ==================================== */
+
+.herramienta-card.balanceador {
+    --accent: #FF6B6B;
+}
+
+.herramienta-card.solubilidad {
+    --accent: #4ECDC4;
+}
+
+.herramienta-card.laboratorio {
+    --accent: #95E1D3;
+}
+
+/* Badge de funcionalidad */
+.herramienta-badge {
+    display: inline-block;
+    background: var(--border-glow);
+    color: var(--bg-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+/* ====================================
+   RESPONSIVE - HERRAMIENTAS
+   ==================================== */
+
+@media (max-width: 1024px) {
+    .herramientas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .herramienta-card {
+        padding: 1.5rem;
+    }
+
+    .herramienta-icon {
+        font-size: 3rem;
+    }
+
+    .herramienta-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .herramientas-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .herramienta-card {
+        padding: 1.5rem;
+    }
+
+    .herramienta-icon {
+        font-size: 2.5rem;
+    }
+
+    .herramienta-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .herramienta-card p {
+        font-size: 0.9rem;
+    }
+
+    .herramienta-btn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .herramientas-grid {
+        gap: 1rem;
+    }
+
+    .herramienta-card {
+        padding: 1rem;
+    }
+
+    .herramienta-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .herramienta-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .herramienta-card p {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .herramienta-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}

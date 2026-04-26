@@ -1,209 +1,180 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>ChemCurator - Constructor de Enlaces Químicos</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='tabla-p.css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química Interactiva</title>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="src/styles/global.css">
+    <link rel="stylesheet" href="src/styles/navbar.css">
+    <link rel="stylesheet" href="src/styles/tabla.css">
+    <link rel="stylesheet" href="src/styles/modal.css">
+    <link rel="stylesheet" href="src/styles/tablero.css">
+    <link rel="stylesheet" href="src/styles/herramientas.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- NAVBAR SUPERIOR -->
-    <div class="navbar-top">
-        <div class="navbar-top-content">
-            <div class="navbar-logo">
-                <i class="fas fa-flask-vial"></i>
-                <span class="logo-text">ChemCurator</span>
-            </div>
-            <div class="navbar-nav">
-                <a href="#" class="nav-link">Lab</a>
-                <a href="#" class="nav-link active">Table</a>
-                <a href="#" class="nav-link">Library</a>
-                <a href="#" class="nav-link">History</a>
-            </div>
-            <div class="navbar-actions">
-                <button class="btn-analyze"><i class="fas fa-flask"></i> Analyze Reaction</button>
-                <button class="btn-help" title="Ayuda"><i class="fas fa-circle-question"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="main-layout">
-        <!-- SIDEBAR IZQUIERDO -->
-        <aside class="sidebar-left">
-            <div class="sidebar-header">
-                <div class="user-profile">
-                    <div class="user-avatar">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                    <div class="user-info">
-                        <div class="user-name">Molecular Curator</div>
-                        <div class="user-level">Level 4 Chemist</div>
-                    </div>
+    <div id="app">
+        <!-- Navbar -->
+        <nav id="navbar" class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-title">
+                    <span class="title-icon">⚛️</span>
+                    <h1>QUÍMICA INTERACTIVA</h1>
                 </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <div class="nav-item">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Workspace</span>
-                </div>
-                <div class="nav-item active">
-                    <i class="fas fa-table"></i>
-                    <span>Elements</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-link"></i>
-                    <span>Bonding</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-shield"></i>
-                    <span>Safety</span>
-                </div>
-                <div class="nav-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Reports</span>
-                </div>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="nav-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Settings</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="main-content">
-            <!-- HEADER PRINCIPAL -->
-            <div class="main-header">
-                <div class="header-title">
-                    <h1>Constructor de Enlaces Químicos</h1>
-                    <p>Plataforma Interactiva de Estructuras de Lewis</p>
-                </div>
-            </div>
-
-            <!-- ÁREA DEL CANVAS -->
-            <div class="canvas-container">
-                <div id="tablero" class="tablero">
-                    <div class="canvas-placeholder">
-                        <i class="fas fa-arrow-pointer"></i>
-                        <p>Selecciona elementos de la tabla para comenzar</p>
-                    </div>
-                </div>
-
-                <!-- BOTÓN FLOTANTE TABLA -->
-                <button id="toggle-tabla-modal-btn" class="btn-floating-table" title="Abrir Tabla Periódica">
-                    <i class="fas fa-table"></i>
-                </button>
-            </div>
-
-            <!-- PANEL INFERIOR - ANÁLISIS EN VIVO -->
-            <div class="analysis-panel">
-                <div class="analysis-header">
-                    <span class="analysis-label">LIVE ANALYSIS</span>
-                    <h3>Bond Information</h3>
-                </div>
-
-                <div class="analysis-content">
-                    <div class="bond-type-badge" id="bond-type-badge">
-                        <span>No bond detected</span>
-                    </div>
-
-                    <div class="analysis-grid">
-                        <div class="analysis-item">
-                            <div class="analysis-item-label">Reaction Formula</div>
-                            <div id="reaction-formula" class="analysis-item-value">
-                                Select elements to see formula
-                            </div>
-                        </div>
-
-                        <div class="analysis-item">
-                            <div class="analysis-item-label">Transfer Mechanics</div>
-                            <div id="transfer-mechanics" class="analysis-item-value">
-                                <em>Electron transfer details</em>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel-actions">
-                        <button id="limpiar-btn" class="btn-action btn-clear">
-                            <i class="fas fa-trash"></i> Limpiar Tablero
-                        </button>
-                        <button id="info-btn" class="btn-action btn-help">
-                            <i class="fas fa-circle-question"></i> Ayuda
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- MODAL - TABLA PERIÓDICA -->
-    <div id="tabla-modal" class="tabla-modal">
-        <div class="tabla-modal-content">
-            <div class="tabla-modal-header">
-                <h3>Tabla Periódica de Elementos</h3>
-                <button id="close-tabla-modal-btn" class="close-modal-btn">×</button>
-            </div>
-
-            <div class="filter-section">
-                <h3>Filtrar por categoría:</h3>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="no-metal">No-Metales</button>
-                    <button class="filter-btn" data-filter="halógeno">Halógenos</button>
-                    <button class="filter-btn" data-filter="noble">Gases Nobles</button>
-                    <button class="filter-btn" data-filter="metal-alcalino">Met. Alcalinos</button>
-                    <button class="filter-btn" data-filter="metal-transicion">Met. Transición</button>
-                </div>
-            </div>
-
-            <div class="tabla-container">
-                <div id="tabla-periodica" class="tabla-periodica"></div>
-            </div>
-
-            <div class="info-panel">
-                <div id="elemento-info" class="elemento-detalles">
-                    <p style="color: #999;">Selecciona un elemento para ver sus propiedades</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL - AYUDA -->
-    <div id="modal-ayuda" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Cómo usar el Constructor de Enlaces</h2>
-                <button class="close-btn">&times;</button>
-            </div>
-            <div class="modal-body">
-                <h3>Paso 1: Selecciona elementos</h3>
-                <p>Haz clic en cualquier elemento de la tabla periódica para agregarlo al tablero.</p>
-
-                <h3>Paso 2: Arrastra los átomos</h3>
-                <p>Usa el mouse para mover los átomos en el canvas central.</p>
-
-                <h3>Paso 3: Forma enlaces</h3>
-                <p>Acerca dos átomos para que se formen enlaces químicos automáticamente.</p>
-
-                <h3>Interpretación visual</h3>
-                <ul>
-                    <li>Los puntos alrededor del átomo representan los <strong>electrones de valencia</strong></li>
-                    <li>El número indica la <strong>carga</strong> del átomo</li>
-                    <li>Los colores indican el tipo de elemento</li>
+                <ul class="navbar-menu">
+                    <li><a href="#tablero" class="nav-link active" data-section="tablero">Tablero Interactivo</a></li>
+                    <li><a href="#tabla" class="nav-link" data-section="tabla">Tabla Periódica</a></li>
+                    <li><a href="#herramientas" class="nav-link" data-section="herramientas">Herramientas</a></li>
                 </ul>
+                <div class="navbar-icons">
+                    <button id="info-btn" class="icon-btn" title="Información">ℹ️</button>
+                    <button id="settings-btn" class="icon-btn" title="Configuración">⚙️</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor Principal -->
+        <main class="main-container">
+            <!-- Sección: Tablero Interactivo -->
+            <section id="tablero-section" class="view active" data-view="tablero">
+                <div id="tablero" class="tablero-container">
+                    <div class="tablero-header">
+                        <h2>Tablero Interactivo</h2>
+                        <p class="subtitle">Arrastra átomos para crear moléculas</p>
+                    </div>
+                    <div class="tablero-canvas" id="canvas-area">
+                        <div class="canvas-placeholder">
+                            <p>Selecciona elementos de la tabla para colocarlos aquí</p>
+                        </div>
+                    </div>
+                    <div class="tablero-info">
+                        <div class="info-panel">
+                            <h3>Información del Tablero</h3>
+                            <div id="tablero-stats">
+                                <p>Átomos colocados: <span id="count-atoms">0</span></p>
+                                <p>Coordenadas: <span id="cursor-coords">X: 0, Y: 0</span></p>
+                            </div>
+                        </div>
+                        <div class="info-panel">
+                            <h3>Explicaciones</h3>
+                            <p id="tablero-explanation">Haz clic en un elemento de la tabla periódica para agregar átomos al tablero. Puedes arrastrarlos para posicionarlos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Tabla Periódica -->
+            <section id="tabla-section" class="view" data-view="tabla">
+                <div id="tabla" class="tabla-container">
+                    <div class="tabla-header">
+                        <h2>Tabla Periódica Interactiva</h2>
+                        <p class="subtitle">Haz clic en cualquier elemento para ver detalles</p>
+                    </div>
+                    <div class="tabla-legend">
+                        <div class="legend-item alcalinos"><span>Alcalinos</span></div>
+                        <div class="legend-item alcalinoterreos"><span>Alcalinoterreos</span></div>
+                        <div class="legend-item transicion"><span>Transición</span></div>
+                        <div class="legend-item nometales"><span>No Metales</span></div>
+                        <div class="legend-item gasesnobles"><span>Gases Nobles</span></div>
+                        <div class="legend-item lantanidos"><span>Lantánidos</span></div>
+                        <div class="legend-item actinidos"><span>Actínidos</span></div>
+                    </div>
+                    <div id="tabla-periódica" class="tabla-grid">
+                        <!-- Se genera dinámicamente con JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección: Herramientas -->
+            <section id="herramientas-section" class="view" data-view="herramientas">
+                <div id="herramientas" class="herramientas-container">
+                    <div class="herramientas-header">
+                        <h2>Herramientas Químicas</h2>
+                        <p class="subtitle">Utilidades interactivas para cálculos químicos</p>
+                    </div>
+                    <div class="herramientas-grid" id="herramientas-grid">
+                        <!-- Se genera dinámicamente con JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal Flotante -->
+        <div id="modal-overlay" class="modal-overlay">
+            <div id="modal-element" class="modal-element">
+                <button class="modal-close" id="modal-close">✕</button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-atom-visual">
+                            <div id="atom-nucleus" class="nucleus"></div>
+                            <div class="orbital orbital-1"></div>
+                            <div class="orbital orbital-2"></div>
+                            <div class="orbital orbital-3"></div>
+                        </div>
+                        <div class="modal-title-info">
+                            <h2 id="modal-name">Elemento</h2>
+                            <p id="modal-symbol" class="symbol">XX</p>
+                            <p id="modal-number" class="atomic-number">Z = 0</p>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Masa Atómica</label>
+                                <p id="modal-mass">0.000</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Tipo</label>
+                                <p id="modal-type">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Estado</label>
+                                <p id="modal-state">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Grupo</label>
+                                <p id="modal-group">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Período</label>
+                                <p id="modal-period">-</p>
+                            </div>
+                            <div class="info-item">
+                                <label>Iones Comunes</label>
+                                <p id="modal-ions">-</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <label>Configuración Electrónica</label>
+                            <p id="modal-config">-</p>
+                        </div>
+                        <div class="info-section">
+                            <label>Descripción</label>
+                            <p id="modal-description">-</p>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="modal-simulate" class="btn-action">Simular Reacción</button>
+                        <button id="modal-close-btn" class="btn-close">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src='main.js'></script> 
+    <!-- Scripts -->
+    <script src="src/data/elementos.js"></script>
+    <script src="src/components/navbar.js"></script>
+    <script src="src/components/tabla-periodica.js"></script>
+    <script src="src/components/modal-elemento.js"></script>
+    <script src="src/components/tablero.js"></script>
+    <script src="src/components/herramientas.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

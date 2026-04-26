@@ -1,0 +1,364 @@
+/* ====================================
+   ESTILOS GLOBALES - QUÍMICA INTERACTIVA
+   ==================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores Oficiales */
+    --bg-primary: #0A0F1F;
+    --bg-secondary: #111827;
+    --border-glow: #00E5FF;
+    --text-primary: #E0F7FA;
+    --text-secondary: #8AB4F8;
+    --button-active: #00C8FF;
+    --shadow-glow: rgba(0, 229, 255, 0.25);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    
+    /* Colores adicionales */
+    --alcalinos: #FF6B6B;
+    --alcalinoterreos: #FFA500;
+    --transicion: #9D4EDD;
+    --nometales: #00D9FF;
+    --gasesnobles: #64B5F6;
+    --lantanidos: #FFD700;
+    --actinidos: #FF69B4;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ====================================
+   TIPOGRAFÍA
+   ==================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px var(--shadow-glow);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--border-glow);
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* ====================================
+   CONTENEDOR PRINCIPAL
+   ==================================== */
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ====================================
+   VISTAS (VIEWS)
+   ==================================== */
+
+.view {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====================================
+   HEADERS
+   ==================================== */
+
+.tablero-header,
+.tabla-header,
+.herramientas-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-glow);
+    box-shadow: 0 10px 30px var(--shadow-glow);
+}
+
+.tablero-header h2,
+.tabla-header h2,
+.herramientas-header h2 {
+    text-shadow: 0 0 15px var(--shadow-glow);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+}
+
+/* ====================================
+   BOTONES
+   ==================================== */
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.btn-action,
+.btn-close {
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--border-glow);
+    color: var(--text-primary);
+    background: transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-action::before,
+.btn-close::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--shadow-glow);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-action:hover::before,
+.btn-close:hover::before {
+    left: 0;
+}
+
+.btn-action:hover,
+.btn-close:hover {
+    color: var(--button-active);
+    box-shadow: 0 0 20px var(--shadow-glow),
+                inset 0 0 20px var(--shadow-glow);
+    transform: scale(1.05);
+}
+
+.btn-action.primary {
+    background: linear-gradient(135deg, var(--button-active), var(--border-glow));
+    border: none;
+    color: var(--bg-primary);
+    font-weight: 700;
+}
+
+.btn-action.primary:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 10px 30px var(--shadow-glow);
+}
+
+/* ====================================
+   PANELES
+   ==================================== */
+
+.info-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px var(--shadow-glow),
+                inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+.info-panel h3 {
+    color: var(--border-glow);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.info-panel p {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* ====================================
+   INPUTS Y FORMULARIOS
+   ==================================== */
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glow);
+    color: var(--text-primary);
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--button-active);
+    box-shadow: 0 0 15px var(--shadow-glow),
+                inset 0 0 10px rgba(0, 229, 255, 0.1);
+}
+
+/* ====================================
+   SCROLLBAR PERSONALIZADA
+   ==================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-glow);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--button-active);
+    box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+/* ====================================
+   ANIMACIONES
+   ==================================== */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px var(--shadow-glow);
+    }
+    50% {
+        text-shadow: 0 0 30px var(--shadow-glow);
+    }
+    100% {
+        text-shadow: 0 0 10px var(--shadow-glow);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ====================================
+   RESPONSIVE
+   ==================================== */
+
+@media (max-width: 1024px) {
+    .main-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .main-container {
+        padding: 1rem 0.5rem;
+    }
+}

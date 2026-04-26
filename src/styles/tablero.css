@@ -1,0 +1,281 @@
+/* ====================================
+   ESTILOS - TABLERO INTERACTIVO
+   ==================================== */
+
+.tablero-container {
+    animation: slideUp 0.5s ease-in-out;
+}
+
+/* ====================================
+   CANVAS DEL TABLERO
+   ==================================== */
+
+.tablero-canvas {
+    width: 100%;
+    height: 600px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-glow);
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 2rem;
+    cursor: crosshair;
+    overflow: hidden;
+    box-shadow: 0 0 30px var(--shadow-glow),
+                inset 0 0 20px rgba(0, 229, 255, 0.05);
+}
+
+.canvas-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.canvas-placeholder p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* ====================================
+   ÁTOMOS EN EL TABLERO
+   ==================================== */
+
+.atom {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: grab;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    border: 2px solid;
+    box-shadow: 0 0 15px currentColor;
+}
+
+.atom:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 25px currentColor,
+                inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.atom:active,
+.atom.dragging {
+    cursor: grabbing;
+    transform: scale(1.15);
+    z-index: 100;
+}
+
+/* Colores de átomos */
+.atom.alcalinos {
+    border-color: var(--alcalinos);
+    color: var(--alcalinos);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.atom.alcalinoterreos {
+    border-color: var(--alcalinoterreos);
+    color: var(--alcalinoterreos);
+    background: rgba(255, 165, 0, 0.1);
+}
+
+.atom.transicion {
+    border-color: var(--transicion);
+    color: var(--transicion);
+    background: rgba(157, 78, 221, 0.1);
+}
+
+.atom.nometales {
+    border-color: var(--nometales);
+    color: var(--nometales);
+    background: rgba(0, 217, 255, 0.1);
+}
+
+.atom.gasesnobles {
+    border-color: var(--gasesnobles);
+    color: var(--gasesnobles);
+    background: rgba(100, 181, 246, 0.1);
+}
+
+.atom.lantanidos {
+    border-color: var(--lantanidos);
+    color: var(--lantanidos);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.atom.actinidos {
+    border-color: var(--actinidos);
+    color: var(--actinidos);
+    background: rgba(255, 105, 180, 0.1);
+}
+
+/* ====================================
+   PANEL DE INFORMACIÓN
+   ==================================== */
+
+.tablero-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.info-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px var(--shadow-glow),
+                inset 0 0 15px rgba(0, 229, 255, 0.05);
+}
+
+.info-panel h3 {
+    color: var(--border-glow);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+#tablero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#tablero-stats p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+#tablero-stats span {
+    color: var(--border-glow);
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 1px;
+}
+
+#tablero-explanation {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ====================================
+   ANIMACIONES DE TABLERO
+   ==================================== */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.atom.new {
+    animation: float 0.5s ease-out;
+}
+
+/* ====================================
+   INDICADOR DE CONEXIÓN
+   ==================================== */
+
+.connection-line {
+    position: absolute;
+    stroke: var(--border-glow);
+    stroke-width: 2;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: drop-shadow(0 0 5px var(--shadow-glow));
+}
+
+/* ====================================
+   RESPONSIVE - TABLERO
+   ==================================== */
+
+@media (max-width: 1024px) {
+    .tablero-canvas {
+        height: 500px;
+    }
+
+    .tablero-info {
+        grid-template-columns: 1fr;
+    }
+
+    .atom {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .tablero-canvas {
+        height: 400px;
+        margin-bottom: 1.5rem;
+    }
+
+    .atom {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .info-panel {
+        padding: 1rem;
+    }
+
+    .info-panel h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    #tablero-stats,
+    #tablero-explanation {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tablero-canvas {
+        height: 300px;
+    }
+
+    .atom {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+
+    .info-panel {
+        padding: 0.8rem;
+    }
+
+    .info-panel h3 {
+        font-size: 0.8rem;
+    }
+
+    #tablero-stats p,
+    #tablero-explanation {
+        font-size: 0.8rem;
+    }
+}
