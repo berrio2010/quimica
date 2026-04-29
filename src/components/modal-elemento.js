@@ -44,10 +44,14 @@ class ModalElemento {
             this.atomo3D.dispose();
         }
 
-        // Crear nuevo visualizador 3D
+        // Crear nuevo visualizador 3D usando el nuevo módulo
         const container3D = document.getElementById('modal-atom-3d');
         container3D.innerHTML = ''; // Limpiar
-        this.atomo3D = new Atomo3D('modal-atom-3d', elemento);
+        container3D.classList.add('atom-3d-container');
+        
+        // Usar el nuevo AtomRenderer
+        this.atomo3D = new AtomRenderer();
+        this.atomo3D.renderAtom(elemento, container3D);
 
         // Mostrar modal
         this.overlay.classList.add('active');

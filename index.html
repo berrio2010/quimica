@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="src/styles/modal.css">
     <link rel="stylesheet" href="src/styles/tablero.css">
     <link rel="stylesheet" href="src/styles/herramientas.css">
+    <link rel="stylesheet" href="src/styles/atom3d.css">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +21,13 @@
 
     <!-- Three.js para visualización 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Módulo 3D - Visualizador Atómico -->
+    <script src="src/3d/sceneConfig.js"></script>
+    <script src="src/3d/materials.js"></script>
+    <script src="src/3d/orbitalGenerator.js"></script>
+    <script src="src/3d/electronAnimator.js"></script>
+    <script src="src/3d/atomRenderer.js"></script>
 </head>
 <body>
     <div id="app">
@@ -169,7 +177,6 @@
     <!-- Scripts -->
     <script src="src/data/elementos.js"></script>
     <script src="src/data/moleculas.js"></script>
-    <script src="src/components/atomo-3d.js"></script>
     <script src="src/components/navbar.js"></script>
     <script src="src/components/tabla-periodica.js"></script>
     <script src="src/components/modal-elemento.js"></script>

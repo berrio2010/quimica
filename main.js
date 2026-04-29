@@ -105,7 +105,7 @@ function mostrarInfo() {
         <div class="info-section">
             <p style="text-align: center; margin-top: 2rem; opacity: 0.7;">
                 💡 Andersson Developers<br>
-                📅 Versión 1.0.0
+                📅 Versión 2.0.0
             </p>
         </div>
     `;
@@ -154,7 +154,7 @@ function mostrarConfiguracion() {
 // ====================================
 
 window.APP = {
-    version: '1.0.0',
+    version: '2.0.0',
     nombre: 'Química Interactiva',
     mostrarInfo: mostrarInfo,
     mostrarConfiguracion: mostrarConfiguracion,

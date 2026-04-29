@@ -1,0 +1,220 @@
+/* ====================================
+   ESTILOS - VISUALIZADOR ATÓMICO 3D
+   ==================================== */
+
+/* Contenedor principal del visualizador 3D */
+.atom-3d-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    background: linear-gradient(135deg, #0a1628 0%, #1a2847 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #00e5ff;
+    box-shadow: 
+        0 0 30px rgba(0, 229, 255, 0.3),
+        inset 0 0 30px rgba(0, 229, 255, 0.05);
+}
+
+/* Canvas del renderer Three.js */
+.atom-3d-container canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 10px;
+}
+
+/* Animación de entrada */
+@keyframes atomFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.atom-3d-container {
+    animation: atomFadeIn 0.6s ease-out;
+}
+
+/* Efecto de glow suave */
+.atom-3d-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 229, 255, 0.05) 100%);
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+/* Estado deshabilitado */
+.atom-3d-container.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Controles del visualizador (opcional) */
+.atom-3d-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.atom-3d-controls button {
+    background: rgba(0, 229, 255, 0.2);
+    border: 1px solid #00e5ff;
+    color: #00e5ff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.atom-3d-controls button:hover {
+    background: rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.atom-3d-controls button:active {
+    transform: translateY(0);
+}
+
+/* Indicador de información */
+.atom-3d-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00e5ff;
+    color: #00e5ff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.atom-3d-container:hover .atom-3d-info {
+    opacity: 1;
+}
+
+/* Etiquetas de información */
+.atom-3d-info-label {
+    display: block;
+    margin: 4px 0;
+    color: #00e5ff;
+}
+
+.atom-3d-info-value {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Spinner de carga (mientras se renderiza) */
+.atom-3d-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 229, 255, 0.3);
+    border-top-color: #00e5ff;
+    border-radius: 50%;
+    animation: atomSpinner 1s linear infinite;
+    z-index: 5;
+}
+
+@keyframes atomSpinner {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Mensaje de error */
+.atom-3d-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 0, 0, 0.2);
+    border: 2px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 80%;
+    z-index: 10;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .atom-3d-container {
+        min-height: 250px;
+    }
+
+    .atom-3d-controls {
+        flex-direction: column;
+    }
+
+    .atom-3d-controls button {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .atom-3d-info {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+/* Animación de pulso suave (opcional) */
+@keyframes atomPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(0, 229, 255, 0.3),
+            inset 0 0 30px rgba(0, 229, 255, 0.05);
+    }
+    50% {
+        box-shadow: 
+            0 0 50px rgba(0, 229, 255, 0.5),
+            inset 0 0 30px rgba(0, 229, 255, 0.1);
+    }
+}
+
+.atom-3d-container.pulse {
+    animation: atomPulse 3s ease-in-out infinite;
+}
+
+/* Tema oscuro adicional */
+@media (prefers-color-scheme: dark) {
+    .atom-3d-container {
+        border-color: #00e5ff;
+    }
+}
+
+/* Cursor personalizado */
+.atom-3d-container {
+    cursor: grab;
+}
+
+.atom-3d-container:active {
+    cursor: grabbing;
+}
