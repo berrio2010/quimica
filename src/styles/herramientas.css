@@ -271,3 +271,463 @@
         font-size: 0.85rem;
     }
 }
+
+/* ====================================
+   MODALES DE HERRAMIENTAS
+   ==================================== */
+
+.herramienta-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.herramienta-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.herramienta-modal {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border: 2px solid var(--border-glow);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 0 50px var(--shadow-glow),
+                0 0 100px rgba(0, 229, 255, 0.2),
+                inset 0 0 30px rgba(0, 229, 255, 0.05);
+    position: relative;
+    animation: modalSlideIn 0.4s ease-out;
+    padding: 2rem;
+}
+
+.herramienta-modal-large {
+    max-width: 700px;
+    max-height: 90vh;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.herramienta-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid var(--border-glow);
+    background: transparent;
+    color: var(--border-glow);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.herramienta-modal-close:hover {
+    background: var(--shadow-glow);
+    box-shadow: 0 0 20px var(--shadow-glow),
+                inset 0 0 15px var(--shadow-glow);
+    transform: rotate(90deg) scale(1.15);
+    color: var(--button-active);
+}
+
+.herramienta-modal-content {
+    color: var(--text-primary);
+}
+
+.herramienta-modal-content h2 {
+    color: var(--border-glow);
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    text-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.modal-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ====================================
+   INPUT Y FORMULARIOS
+   ==================================== */
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-glow);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.05);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--button-active);
+    box-shadow: 0 0 15px var(--shadow-glow),
+                inset 0 0 10px rgba(0, 229, 255, 0.1);
+}
+
+/* ====================================
+   BOTONES DE ACCIÓN EN MODALES
+   ==================================== */
+
+.herramienta-btn-action {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--shadow-glow), rgba(0, 229, 255, 0.3));
+    border: 2px solid var(--border-glow);
+    color: var(--border-glow);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.herramienta-btn-action:hover {
+    background: var(--shadow-glow);
+    color: var(--bg-primary);
+    box-shadow: 0 0 30px var(--shadow-glow),
+                inset 0 0 15px var(--shadow-glow);
+    transform: scale(1.02);
+}
+
+.herramienta-btn-action:active {
+    transform: scale(0.98);
+}
+
+/* ====================================
+   CAJAS DE INFORMACIÓN
+   ==================================== */
+
+.resultado-box {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-glow);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.05);
+}
+
+.resultado-box h3 {
+    color: var(--border-glow);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.resultado-box p {
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.explicacion {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.info-box {
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.info-box h4 {
+    color: var(--border-glow);
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-box li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.info-box li:last-child {
+    border-bottom: none;
+}
+
+/* ====================================
+   SOLUBILIDAD
+   ==================================== */
+
+.solubilidad-indicator {
+    margin: 1rem 0;
+}
+
+.solubilidad-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.solubilidad-S {
+    background: rgba(76, 205, 75, 0.3);
+    border: 1px solid #4CCD4B;
+    color: #4CCD4B;
+}
+
+.solubilidad-PS {
+    background: rgba(255, 193, 7, 0.3);
+    border: 1px solid #FFC107;
+    color: #FFC107;
+}
+
+.solubilidad-I {
+    background: rgba(255, 107, 107, 0.3);
+    border: 1px solid #FF6B6B;
+    color: #FF6B6B;
+}
+
+.solubilidad-unknown {
+    background: rgba(100, 100, 100, 0.3);
+    border: 1px solid #999;
+    color: #999;
+}
+
+.compuestos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.compuesto-tag {
+    background: rgba(0, 229, 255, 0.15);
+    border: 1px solid var(--border-glow);
+    color: var(--border-glow);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* ====================================
+   LABORATORIO VIRTUAL
+   ==================================== */
+
+.laboratorio-area {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    min-height: 300px;
+}
+
+.laboratorio-panel {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-glow);
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.05);
+}
+
+.laboratorio-panel h4 {
+    color: var(--border-glow);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+.atomos-disponibles {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.atomo-draggable {
+    background: linear-gradient(135deg, var(--shadow-glow), rgba(0, 229, 255, 0.3));
+    border: 2px solid var(--border-glow);
+    color: var(--border-glow);
+    padding: 0.6rem 0.8rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.atomo-draggable:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px var(--shadow-glow);
+}
+
+.atomo-draggable:active {
+    cursor: grabbing;
+}
+
+.laboratorio-canvas {
+    background: var(--bg-primary);
+    border: 2px dashed var(--border-glow);
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    cursor: copy;
+    transition: all 0.3s ease;
+}
+
+.laboratorio-canvas:hover {
+    border-color: var(--button-active);
+    background: rgba(0, 229, 255, 0.05);
+}
+
+.atomo-canvas {
+    position: absolute;
+    background: linear-gradient(135deg, var(--shadow-glow), rgba(0, 229, 255, 0.3));
+    border: 2px solid var(--border-glow);
+    color: var(--border-glow);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 0 10px var(--shadow-glow);
+}
+
+.reacciones-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.reacciones-list p {
+    color: var(--border-glow);
+    margin: 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.reacciones-list p:last-child {
+    border-bottom: none;
+}
+
+/* ====================================
+   RESPONSIVE - MODALES
+   ==================================== */
+
+@media (max-width: 768px) {
+    .herramienta-modal {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .herramienta-modal-large {
+        max-width: 95%;
+    }
+
+    .laboratorio-area {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .herramienta-modal-close {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .herramienta-modal {
+        width: 100%;
+        border-radius: 0;
+        max-height: 100vh;
+        padding: 1rem;
+    }
+
+    .herramienta-modal-close {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .herramienta-modal-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .laboratorio-area {
+        gap: 0.5rem;
+    }
+
+    .laboratorio-panel {
+        padding: 0.8rem;
+    }
+
+    .laboratorio-panel h4 {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+}

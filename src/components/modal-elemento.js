@@ -8,8 +8,9 @@ class ModalElemento {
         this.modal = document.getElementById('modal-element');
         this.closeBtn = document.getElementById('modal-close');
         this.closeBtnAlt = document.getElementById('modal-close-btn');
-        this.simulateBtn = document.getElementById('modal-simulate');
+        this.addAtomBtn = document.getElementById('modal-add-atom');
         this.elementoActual = null;
+        this.atomo3D = null;
         this.init();
     }
 
@@ -19,7 +20,7 @@ class ModalElemento {
         this.overlay.addEventListener('click', (e) => {
             if (e.target === this.overlay) this.cerrar();
         });
-        this.simulateBtn.addEventListener('click', () => this.simularReaccion());
+        this.addAtomBtn.addEventListener('click', () => this.agregarAlTablero());
     }
 
     mostrar(elemento) {
@@ -38,10 +39,15 @@ class ModalElemento {
         document.getElementById('modal-config').textContent = elemento.config;
         document.getElementById('modal-description').textContent = elemento.descripcion;
 
-        // Cambiar color del núcleo según elemento
-        const nucleusColor = this.obtenerColor(elemento.categoria);
-        document.getElementById('atom-nucleus').style.background = `radial-gradient(circle, ${nucleusColor}, ${nucleusColor}99)`;
-        document.getElementById('atom-nucleus').style.boxShadow = `0 0 20px ${nucleusColor}`;
+        // Limpiar visualizador 3D anterior
+        if (this.atomo3D) {
+            this.atomo3D.dispose();
+        }
+
+        // Crear nuevo visualizador 3D
+        const container3D = document.getElementById('modal-atom-3d');
+        container3D.innerHTML = ''; // Limpiar
+        this.atomo3D = new Atomo3D('modal-atom-3d', elemento);
 
         // Mostrar modal
         this.overlay.classList.add('active');
@@ -50,6 +56,12 @@ class ModalElemento {
     cerrar() {
         this.overlay.classList.remove('active');
         this.elementoActual = null;
+        
+        // Limpiar visualizador 3D
+        if (this.atomo3D) {
+            this.atomo3D.dispose();
+            this.atomo3D = null;
+        }
     }
 
     obtenerColor(categoria) {
@@ -65,10 +77,21 @@ class ModalElemento {
         return colores[categoria] || '#00E5FF';
     }
 
-    simularReaccion() {
+    agregarAlTablero() {
         if (!this.elementoActual) return;
         
-        alert(`Simulación: Reacción del ${this.elementoActual.nombre}\n\nEste es un ejemplo de simulación interactiva.`);
+        // Agregar el elemento al tablero
+        if (window.tablero) {
+            window.tablero.agregarAtomo(this.elementoActual);
+            
+            // Cambiar a la vista del tablero
+            if (window.navbar) {
+                window.navbar.switchView('tablero');
+            }
+            
+            // Cerrar el modal
+            this.cerrar();
+        }
     }
 }
 

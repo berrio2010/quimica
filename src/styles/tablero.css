@@ -279,3 +279,73 @@
         font-size: 0.8rem;
     }
 }
+
+/* ====================================
+   ESTILOS - ENLACES QUÍMICOS
+   ==================================== */
+
+.enlace-svg {
+    z-index: 20;
+}
+
+.bond-line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: bondPulse 1.5s ease-in-out infinite;
+}
+
+.bond-label {
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+    font-family: 'Inter', sans-serif;
+    pointer-events: none;
+    user-select: none;
+}
+
+.tooltip-enlace {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glow);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    box-shadow: 0 0 15px var(--shadow-glow);
+    display: none;
+    white-space: nowrap;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.tablero-canvas:hover .tooltip-enlace {
+    display: block;
+}
+
+@keyframes bondPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ====================================
+   TIPOS DE ENLACE - COLORES
+   ==================================== */
+
+/* Enlace Iónico - Rojo */
+.bond-ionic {
+    stroke: #FF6B6B;
+    filter: drop-shadow(0 0 3px #FF6B6B);
+}
+
+/* Enlace Covalente Polar - Oro */
+.bond-polar {
+    stroke: #FFD700;
+    filter: drop-shadow(0 0 3px #FFD700);
+}
+
+/* Enlace Covalente Puro - Cyan */
+.bond-covalent {
+    stroke: #00D9FF;
+    filter: drop-shadow(0 0 3px #00D9FF);
+}

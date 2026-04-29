@@ -40,7 +40,6 @@ class TablaPeriodica {
             button.addEventListener('click', () => {
                 this.seleccionarElemento(elemento);
                 window.modal?.mostrar(elemento);
-                window.tablero?.agregarAtomo(elemento);
             });
 
             this.container.appendChild(button);

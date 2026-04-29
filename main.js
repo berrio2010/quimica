@@ -58,52 +58,95 @@ document.addEventListener('DOMContentLoaded', () => {
 // ====================================
 
 function mostrarInfo() {
-    const info = `
-🧪 QUÍMICA INTERACTIVA v1.0
+    const infoHTML = `
+        <div class="info-section">
+            <h3>📖 GUÍA RÁPIDA</h3>
+            <hr>
+        </div>
 
-📖 GUÍA RÁPIDA:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        <div class="info-section">
+            <h4>🎯 TABLERO INTERACTIVO</h4>
+            <ul>
+                <li>Haz clic en elementos de la tabla para agregarlos</li>
+                <li>Arrastra los átomos para posicionarlos</li>
+                <li>Haz clic derecho para eliminar un átomo</li>
+            </ul>
+        </div>
 
-🎯 TABLERO INTERACTIVO:
-  • Haz clic en elementos de la tabla para agregarlos
-  • Arrastra los átomos para posicionarlos
-  • Haz clic derecho para eliminar un átomo
+        <div class="info-section">
+            <h4>📊 TABLA PERIÓDICA</h4>
+            <ul>
+                <li>Haz clic en cualquier elemento para ver detalles</li>
+                <li>Aprende sobre propiedades y características</li>
+                <li>Visualiza la estructura atómica</li>
+            </ul>
+        </div>
 
-📊 TABLA PERIÓDICA:
-  • Haz clic en cualquier elemento para ver detalles
-  • Aprende sobre propiedades y características
-  • Visualiza la estructura atómica
+        <div class="info-section">
+            <h4>🔧 HERRAMIENTAS</h4>
+            <ul>
+                <li>Balanceador de ecuaciones</li>
+                <li>Tabla de solubilidad</li>
+                <li>Laboratorio virtual</li>
+            </ul>
+        </div>
 
-🔧 HERRAMIENTAS:
-  • Balanceador de ecuaciones
-  • Tabla de solubilidad
-  • Laboratorio virtual
+        <div class="info-section">
+            <h4>⌨️ ATAJOS DE TECLADO</h4>
+            <ul>
+                <li><kbd>ESC</kbd> - Cerrar modal</li>
+                <li><kbd>Ctrl+L</kbd> - Limpiar tablero</li>
+                <li><kbd>1</kbd> - Ir a Tablero</li>
+                <li><kbd>2</kbd> - Ir a Tabla Periódica</li>
+                <li><kbd>3</kbd> - Ir a Herramientas</li>
+            </ul>
+        </div>
 
-⌨️ ATAJOS:
-  • ESC: Cerrar modal
-  • Ctrl+L: Limpiar tablero
-  • 1: Ir a Tablero
-  • 2: Ir a Tabla Periódica
-  • 3: Ir a Herramientas
-
-💡 AUTOR: Andersson Developers
-📅 VERSIÓN: 1.0.0
+        <div class="info-section">
+            <p style="text-align: center; margin-top: 2rem; opacity: 0.7;">
+                💡 Andersson Developers<br>
+                📅 Versión 1.0.0
+            </p>
+        </div>
     `;
-    alert(info);
+    
+    window.modalInfo.mostrar('ℹ️ INFORMACIÓN', infoHTML);
 }
 
 function mostrarConfiguracion() {
-    alert(`
-⚙️ CONFIGURACIÓN
+    const configHTML = `
+        <div class="info-section">
+            <h4>⚙️ OPCIONES DISPONIBLES</h4>
+        </div>
 
-Opciones disponibles:
-• Tema (oscuro/claro) - Próxima versión
-• Idioma - Próxima versión
-• Notificaciones - Próxima versión
-• Unidades - Próxima versión
+        <div class="config-option">
+            <h5>🎨 Tema (Oscuro/Claro)</h5>
+            <p class="text-secondary">Próxima versión</p>
+        </div>
 
-Más configuraciones en desarrollo...
-    `);
+        <div class="config-option">
+            <h5>🌍 Idioma</h5>
+            <p class="text-secondary">Próxima versión</p>
+        </div>
+
+        <div class="config-option">
+            <h5>🔔 Notificaciones</h5>
+            <p class="text-secondary">Próxima versión</p>
+        </div>
+
+        <div class="config-option">
+            <h5>📏 Unidades</h5>
+            <p class="text-secondary">Próxima versión</p>
+        </div>
+
+        <div class="info-section">
+            <p style="margin-top: 2rem; padding: 1rem; background: rgba(0, 229, 255, 0.1); border-radius: 8px; border-left: 3px solid var(--primary-color);">
+                ⚡ Más configuraciones en desarrollo...
+            </p>
+        </div>
+    `;
+    
+    window.modalInfo.mostrar('⚙️ CONFIGURACIÓN', configHTML);
 }
 
 // ====================================

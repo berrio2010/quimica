@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Three.js para visualización 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -111,12 +114,7 @@
                 <button class="modal-close" id="modal-close">✕</button>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div class="modal-atom-visual">
-                            <div id="atom-nucleus" class="nucleus"></div>
-                            <div class="orbital orbital-1"></div>
-                            <div class="orbital orbital-2"></div>
-                            <div class="orbital orbital-3"></div>
-                        </div>
+                        <div id="modal-atom-3d" class="modal-atom-visual-3d"></div>
                         <div class="modal-title-info">
                             <h2 id="modal-name">Elemento</h2>
                             <p id="modal-symbol" class="symbol">XX</p>
@@ -160,7 +158,7 @@
                         </div>
                     </div>
                     <div class="modal-actions">
-                        <button id="modal-simulate" class="btn-action">Simular Reacción</button>
+                        <button id="modal-add-atom" class="btn-action">Agregar al Tablero</button>
                         <button id="modal-close-btn" class="btn-close">Cerrar</button>
                     </div>
                 </div>
@@ -170,9 +168,12 @@
 
     <!-- Scripts -->
     <script src="src/data/elementos.js"></script>
+    <script src="src/data/moleculas.js"></script>
+    <script src="src/components/atomo-3d.js"></script>
     <script src="src/components/navbar.js"></script>
     <script src="src/components/tabla-periodica.js"></script>
     <script src="src/components/modal-elemento.js"></script>
+    <script src="src/components/modal-info.js"></script>
     <script src="src/components/tablero.js"></script>
     <script src="src/components/herramientas.js"></script>
     <script src="main.js"></script>
